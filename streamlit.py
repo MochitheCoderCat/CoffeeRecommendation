@@ -8,7 +8,7 @@ import streamlit as st
 from joblib import load
 import pandas as pd
 from recommendation import recommend_kmeans, recommend_knn
-from visuals import plot_feature_comparison
+from visuals import plot_feature_comparison, plot_categorical_comparison
 
 # Main page title
 st.title("Coffee Recommendation System")
@@ -18,8 +18,8 @@ knn_model = load('./model/knn_model.joblib')
 kmeans_model = load('./model/kmeans_model.joblib')
 
 # Load the dataset to extract coffee names
-df = pd.read_csv('coffee_clean.csv')  # Replace with your dataset path
-coffee_names = df['name'].dropna().unique()  # Get unique coffee names
+df = pd.read_csv('coffee_cleaned.csv')  
+coffee_names = df['name'].dropna().unique()  
 
 # Function to get random coffee choices
 def get_random_coffees():
@@ -83,5 +83,9 @@ if st.sidebar.button("Get Recommendation"):
         if recommendation:
             st.success(f"Recommended Coffee: {recommendation}")
             plot_feature_comparison(user_input, recommendation, df)
+
+            # Plot categorical features
+            categorical_features = ['roast', 'country']  # Add your non-numerical feature names here
+            plot_categorical_comparison(user_input, recommendation, df, categorical_features)
         else:
             st.error("No recommendation could be generated. Please try again.")
