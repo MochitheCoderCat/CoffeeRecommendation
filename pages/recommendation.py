@@ -79,11 +79,39 @@ def run_recommendation_system():
                 st.success(f"Recommended Coffee: {recommendation}")
                 plot_feature_comparison(user_input, recommendation, df)
 
-                # Plot categorical features
-                categorical_features = ['roast', 'country']  # Add your non-numerical feature names here
-                plot_categorical_comparison(user_input, recommendation, df, categorical_features)
-            else:
-                st.error("No recommendation could be generated. Please try again.")
+                # Extract original categorical data
+                categorical_features = ['name', 'roast', 'country']  # Include other categorical features if needed
+                original_data = df[categorical_features]
+
+                # Get data for input coffee(s)
+                input_data = original_data[original_data['name'].isin(user_input)].reset_index(drop=True)
+
+                # Get data for recommended coffee
+                recommended_data = original_data[original_data['name'] == recommendation].reset_index(drop=True)
+
+                st.subheader("Comparison of Categorical Features")
+
+                # Create columns
+                cols = st.columns(len(user_input) + 1)  # Number of input coffees + 1 for recommended coffee
+
+                # Display input coffee(s)
+                for i, coffee_name in enumerate(user_input):
+                    coffee_info = input_data[input_data['name'] == coffee_name].iloc[0]
+                    with cols[i]:
+                        st.markdown(f"**Input Coffee {i + 1}: {coffee_name}**")
+                        st.markdown(f"- **Country**: {coffee_info['country']}")
+                        st.markdown(f"- **Roast**: {coffee_info['roast']}")
+                        # Add more features if needed
+
+                # Display recommended coffee
+                with cols[-1]:
+                    coffee_info = recommended_data.iloc[0]
+                    st.markdown(f"**Recommended Coffee: {recommendation}**")
+                    st.markdown(f"- **Country**: {coffee_info['country']}")
+                    st.markdown(f"- **Roast**: {coffee_info['roast']}")
+                    # Add more features if needed
+
+
 
     st.sidebar.title("Navigation")
     if st.sidebar.button("Back to Dataset Explorer"):
