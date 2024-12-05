@@ -5,7 +5,6 @@ from recommendation import recommend_kmeans, recommend_knn
 from visuals import plot_feature_comparison, plot_categorical_comparison
 
 def run_recommendation_system():
-    st.image("static/coffee_header.jpg")
     # Step-by-step instructions
     st.header("How to Get Recommendation?")
     st.write("""
