@@ -1,7 +1,7 @@
 import streamlit as st
 
 def main():
-    st.title("Coffee Analysis and Recommendation System")
+    st.image("static/coffee_header.jpg")
     st.write("""
     Welcome to the Coffee Analysis and Recommendation System! 
     This application helps you explore coffee data and get personalized recommendations.

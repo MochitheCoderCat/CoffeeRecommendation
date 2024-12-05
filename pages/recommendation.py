@@ -5,8 +5,17 @@ from recommendation import recommend_kmeans, recommend_knn
 from visuals import plot_feature_comparison, plot_categorical_comparison
 
 def run_recommendation_system():
-    # Your existing recommendation system code here
-    st.title("Coffee Recommendation System")
+    st.image("static/coffee_header.jpg")
+    # Step-by-step instructions
+    st.header("How to Get Recommendation?")
+    st.write("""
+    Follow these steps to get personalized coffee recommendations:
+    1. **Select Your Model**: Choose between the KNN Model and KMeans Model from the sidebar.
+    2. **Choose Coffee Options**: Select your first and second coffee choices from the dropdown menus.
+    3. **Randomize Choices**: If you want to explore new options, click the "Randomize" buttons to get random coffee choices.
+    4. **Get Recommendation**: Click the "Get Recommendation" button to see your personalized coffee recommendation based on your selections.
+    5. **View Comparison**: After receiving your recommendation, you can view a comparison of the selected coffees and the recommended coffee.
+    """)
     
     # Load the models
     knn_model = load('./model/knn_model.joblib')
@@ -57,7 +66,7 @@ def run_recommendation_system():
 
 
     # Get Recommendation Button
-    if st.sidebar.button("Get Recommendation"):
+    if st.sidebar.button("Get Recommendation", type="primary"):
         if coffee_1 == "None" and coffee_2 == "None":
             st.warning("Please select at least one coffee to get a recommendation.")
         else:
