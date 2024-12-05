@@ -2,7 +2,7 @@
 
 """
 To run this app, in your terminal:
-> streamlit run streamlit.py
+> streamlit run main.py
 
 Source: https://is.gd/SobJvL
 """
