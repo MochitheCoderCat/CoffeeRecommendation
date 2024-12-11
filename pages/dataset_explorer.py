@@ -173,7 +173,7 @@ def run_dataset_explorer():
         # Scatter Plot of Selected Features
         st.subheader(f"{feature_x} vs. {feature_y}")
         plt.figure(figsize=(10, 6))
-        sns.scatterplot(data=df, x=feature_x, y=feature_y, hue='roast', style='roast', palette='deep')
+        sns.scatterplot(data=df, x=feature_x, y=feature_y)
         plt.title(f"{feature_x} vs. {feature_y}")
         plt.xlabel(feature_x)
         plt.ylabel(feature_y)
